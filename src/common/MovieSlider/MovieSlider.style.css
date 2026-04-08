@@ -1,0 +1,19 @@
+.carousel-container {
+  padding: 60px 15px !important; /* 모바일은 좌우 여백을 줄임 */
+  overflow: visible !important;
+}
+.carousel-container .swiper,
+.carousel-container .swiper-wrapper {
+  overflow: visible !important;
+}
+
+/* 모바일에서 Swiper 화살표(Navigation) 숨기기 (선택사항) */
+@media (max-width: 768px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none !important; /* 모바일은 손가락으로 미는 게 더 편함 */
+  }
+  .carousel-container {
+    padding: 30px 10px !important; /* 모바일은 위아래 공간을 조금 줄여도 됩니다 */
+  }
+}
