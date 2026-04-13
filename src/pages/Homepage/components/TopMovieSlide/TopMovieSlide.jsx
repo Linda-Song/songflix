@@ -8,10 +8,8 @@ import "./TopMovieSlide.style.css";
 import { responsive } from "../../../../constants/responsive";
 
 const TopMovieSlide = () => {
-  const { data, isLoading, isError, error } = useTopRatedMoviesQuery();
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
+  const { data, isError, error } = useTopRatedMoviesQuery();
+
   if (isError) {
     return <Alert variant="danger">{error.message}</Alert>;
   }

@@ -8,7 +8,7 @@ export const responsive = {
     spaceBetween: 10,
   },
   1024: {
-    slidesPerView: 7,
-    spaceBetween: 15,
+    slidesPerView: 6,
+    spaceBetween: 10,
   },
 };

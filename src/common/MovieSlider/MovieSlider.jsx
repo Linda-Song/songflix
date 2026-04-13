@@ -17,6 +17,7 @@ const MovieSlider = ({ title, movies, responsive }) => {
         className="carousel-container"
         watchSlidesProgress={true}
         preventClicks={true}
+        autoHeight={true}
       >
         {movies.map((movie, index) => (
           <SwiperSlide key={movie.id || index}>

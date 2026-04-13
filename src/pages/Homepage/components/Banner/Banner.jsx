@@ -1,14 +1,12 @@
 import React from "react";
 import { usePopularMoviesQuery } from "../../../../hooks/usePopularMovies";
-import { Alert } from "react-bootstrap";
+import { Alert, Spinner } from "react-bootstrap";
+import LoadingSpinner from "../../../../common/LoadingSpinner/LoadingSpinner";
 import "./Banner.style.css";
 
 const Banner = () => {
-  const { data, isLoading, isError, error } = usePopularMoviesQuery();
-  console.log("ddd", data);
-  if (isLoading) {
-    <h1>Loading...</h1>;
-  }
+  const { data, isError, error } = usePopularMoviesQuery();
+
   if (isError) {
     return <Alert variant="danger">{error.message}</Alert>;
   }
