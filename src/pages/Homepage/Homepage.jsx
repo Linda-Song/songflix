@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import Banner from "./components/Banner/Banner";
 import PopularMovieSlide from "./components/PopularMovieSlide/PopularMovieSlide";
 import TopMovieSlide from "./components/TopMovieSlide/TopMovieSlide";
+import "./Homepage.style.css";
 import UpcomingMovieSlide from "./components/UpcomingMovieSlide/UpcomingMovieSlide";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 import "./Homepage.style.css";
