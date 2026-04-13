@@ -8,7 +8,7 @@ const MovieVideos = ({ movieId }) => {
   const { data, isError, error } = useMovieVideosQuery(movieId);
 
   const videoList = data?.data.results;
-  const video = videoList?.find((v) => v.type === "Trailer" || videoList?.[0]);
+  const video = videoList?.find((v) => v.type === "Trailer") || videoList?.[0];
 
   const handleOpen = () => setShowVideo(true);
   const handleClose = () => setShowVideo(false);
@@ -33,7 +33,7 @@ const MovieVideos = ({ movieId }) => {
       <Button
         variant="danger"
         onClick={handleOpen}
-        className="fw-bold d-flex algin-items-center gap-2 video-btn"
+        className="fw-bold d-flex align-items-center gap-2 video-btn"
       >
         <span>Watch Trailer ▶</span>
       </Button>
