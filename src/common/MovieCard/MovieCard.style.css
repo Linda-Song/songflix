@@ -1,67 +1,89 @@
 .movie-card {
   width: 100%;
-  aspect-ratio: 2 / 3;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
   position: relative;
   cursor: pointer;
-  transition: 0.5s;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   transform-origin: center center;
   box-shadow: 0 10px 30px rgba(81, 81, 81, 0.8);
+  background-color: #181818;
+  height: auto;
+}
+.card-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-size: cover;
+  background-position: center;
+  display: block;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+}
+
+.card-overlay {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 110px;
+  opacity: 0;
+  transition: all 0.4s ease;
+  padding: 15px;
+  background-color: #181818;
+  box-sizing: border-box;
 }
 @media (hover: hover) {
   .movie-card:hover {
-    transform: scale(1.2) translateY(-5%);
-    z-index: 999;
+    transform: scale(1.25) translateY(-10%);
+    z-index: 999 !important;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 5px 5px 0 0;
   }
-  .movie-card:hover .overlay {
+
+  .movie-card:hover .card-overlay {
+    visibility: visible;
     opacity: 1;
+    border-radius: 0 0 5px 5px;
   }
 }
-.movie-black {
-  background-color: black;
-}
 
-.overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(43, 41, 41, 0.9);
-  top: 0;
-  left: 0;
-  opacity: 0;
-  transition: all 0.3s;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 5px;
-}
-.overlay:hover {
-  opacity: 1;
-}
 .movie-title {
-  padding: 15px;
-  margin: 0;
-  font-size: 1.5rem;
+  font-size: 0.9rem;
   color: white;
+  margin-bottom: 10px;
 }
-
-.movie-black {
-  width: 100%;
-  background-color: #181818;
-  padding: 12px 15px;
-  box-sizing: border-box;
+.badge-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 0.7rem;
+}
+.movie-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
 }
 
 @media (max-width: 768px) {
-  .movie-card:hover {
-    transform: scale(1.05) translateY(-5%);
+  .movie-card {
+    transform: none !important;
+    transition: filter 0.3s ease;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  @media (hover: hover) {
+    .movie-card:hover {
+      filter: brightness(0.5);
+      transform: none !important;
+    }
+  }
+  .movie-card.active {
+    transform: none !important;
+    filter: brightness(0.5);
   }
 
-  .movie-title {
-    font-size: 2rem;
-    padding: 10px;
+  .movie-card .card-overlay,
+  .movie-card:hover .card-overlay,
+  .movie-card.active .card-overlay {
+    display: none !important;
   }
 }

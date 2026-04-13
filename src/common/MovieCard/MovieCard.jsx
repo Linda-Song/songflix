@@ -1,47 +1,43 @@
-import React from "react";
-import { Badge } from "react-bootstrap";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./MovieCard.style.css";
-import { useMovieGenreQuery } from "../../hooks/useMovieGenre";
+import MovieGenre from "../MovieGenre/MovieGenre";
 
-const MovieCard = ({ movie }) => {
-  const { data: genreData } = useMovieGenreQuery();
-  const showGenre = (genreIdList) => {
-    if (!genreData) return [];
-    const genreNameList = genreIdList.map((id) => {
-      const genreObj = genreData.find((genre) => genre.id === id);
-      return genreObj.name;
-    });
+const MovieCard = ({ movie, showOverlay = true }) => {
+  const navigate = useNavigate();
+  const [showInfo, setShowInfo] = useState(false);
 
-    return genreNameList;
+  const goDetail = () => {
+    navigate(`/movies/${movie.id}`);
+  };
+
+  const imgUrl = `https://media.themoviedb.org/t/p/w533_and_h300_face${movie.backdrop_path}`;
+  const toggleInfo = () => {
+    setShowInfo(!showInfo);
   };
 
   return (
     <div
-      style={{
-        backgroundImage:
-          "url(" +
-          `https://media.themoviedb.org/t/p/w600_and_h900_face${movie.poster_path}` +
-          ")",
-      }}
-      className="movie-card"
+      className={`movie-card ${showInfo ? "active" : ""}`}
+      onClick={toggleInfo}
     >
-      <div className="overlay">
-        <h2 className="movie-title">{movie.title}</h2>
-        <div className="movie-black">
-          <div className="badge-box">
-            {showGenre(movie.genre_ids).map((id) => (
-              <Badge bg="danger">{id}</Badge>
-            ))}
-          </div>
-          <div className="movie-info">
-            <div>{movie.vote_average}</div>
-            <div>{movie.popularity}</div>
-            <Badge bg={movie.adult ? "dark" : "info"} className="mt-1">
-              {movie.adult ? "over18" : "under18"}
-            </Badge>
+      <div
+        className="card-image"
+        style={{ backgroundImage: `url(${imgUrl})` }}
+        onClick={goDetail}
+      ></div>
+      {showOverlay && (
+        <div className="card-overlay" onClick={goDetail}>
+          <h2 className="movie-title">{movie.title}</h2>
+          <MovieGenre genreIds={movie.genre_ids} />
+          <div className="movie-info mt-2">
+            <span>⭐ {movie.vote_average.toFixed(1)}</span>
+            <span className="text-white-50" style={{ fontSize: "0.8rem" }}>
+              ({movie.popularity.toFixed(0)} hits)
+            </span>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
