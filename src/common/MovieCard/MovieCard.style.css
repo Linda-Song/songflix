@@ -1,54 +1,72 @@
 .movie-card {
   width: 100%;
+  display: flex;
   position: relative;
   cursor: pointer;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   transform-origin: center center;
-  box-shadow: 0 10px 30px rgba(81, 81, 81, 0.8);
-  background-color: #181818;
-  height: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background-color: transparent;
+  height: min-content;
+  overflow: hidden;
 }
-.card-image {
+.movie-card:hover {
+  z-index: 999 !important;
+}
+.card-main-img {
   width: 100%;
   aspect-ratio: 16/9;
   background-size: cover;
   background-position: center;
   display: block;
-  border-radius: 5px 5px 0 0;
-  overflow: hidden;
+  border-radius: 5px;
 }
 
 .card-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: absolute;
-  top: 100%;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 110px;
+  height: 100%;
   opacity: 0;
-  transition: all 0.4s ease;
-  padding: 15px;
+  transition: all 0.3s ease;
+  padding: 10px;
   background-color: #181818;
   box-sizing: border-box;
+  transform: translateZ(0);
 }
+
+.card-title {
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  font-weight: bold;
+}
+
 @media (hover: hover) {
   .movie-card:hover {
-    transform: scale(1.25) translateY(-10%);
+    transform: scale(1.4) translateY(3%);
     z-index: 999 !important;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
-    border-radius: 5px 5px 0 0;
+    border-radius: 0 0 5px 5px;
   }
-
   .movie-card:hover .card-overlay {
     visibility: visible;
     opacity: 1;
     border-radius: 0 0 5px 5px;
+    background-color: rgba(24, 24, 24, 0.7);
   }
 }
 
-.movie-title {
-  font-size: 0.9rem;
-  color: white;
-  margin-bottom: 10px;
+.btn-icon {
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn-icon:hover {
+  color: #ff0000 !important;
+  transform: scale(1.1);
 }
 .badge-box {
   display: flex;
@@ -65,20 +83,30 @@
 
 @media (max-width: 768px) {
   .movie-card {
-    transform: none !important;
-    transition: filter 0.3s ease;
+    width: 100%;
+    height: auto;
     overflow: hidden;
     box-sizing: border-box;
+    transition: filter 0.3s ease;
+    transform: none !important;
+    border: 1px solid rgb(43, 43, 43);
+    border-radius: 5px;
   }
+
+  .card-main-img {
+    aspect-ratio: 2 / 3;
+  }
+
   @media (hover: hover) {
     .movie-card:hover {
       filter: brightness(0.5);
-      transform: none !important;
+      border-radius: 5px;
     }
   }
   .movie-card.active {
     transform: none !important;
     filter: brightness(0.5);
+    border-radius: 5px;
   }
 
   .movie-card .card-overlay,

@@ -15,16 +15,16 @@ const MovieRec = ({ movieId }) => {
     return <div className="mt-3 text-white-50"> No recommendations found.</div>;
   }
   // 기본 보여지는 영화
-  const basicRecs = recommendations.slice(0, 6);
+  const basicRecs = recommendations.slice(0, 8);
   // 더보기를 눌러야 나오는 영화
-  const extraRecs = recommendations.slice(6, 18);
+  const extraRecs = recommendations.slice(8, 20);
 
   return (
     <div className="mt-4">
       <Row className="gy-4">
         {/* 1. 처음 6개 영화 */}
         {basicRecs.map((movie) => (
-          <Col key={movie.id} lg={2} md={4} sm={6} xs={6}>
+          <Col key={movie.id} lg={3} md={4} sm={6} xs={6}>
             <MovieCard movie={movie} showOverlay={false} />
           </Col>
         ))}
@@ -34,7 +34,7 @@ const MovieRec = ({ movieId }) => {
         <div id="extra-movies">
           <Row className="gy-4 mt-1">
             {extraRecs.map((movie) => (
-              <Col key={movie.id} lg={2} md={4} sm={6} xs={6}>
+              <Col key={movie.id} lg={3} md={4} sm={6} xs={6}>
                 <MovieCard movie={movie} showOverlay={false} />
               </Col>
             ))}
