@@ -37,11 +37,15 @@
   background-color: #181818;
   box-sizing: border-box;
   transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .card-title {
-  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  font-size: clamp(0.75rem, 1vw, 1.1rem);
   font-weight: bold;
+  line-height: 1;
 }
 
 @media (hover: hover) {
@@ -55,6 +59,7 @@
     opacity: 1;
     border-radius: 0 0 5px 5px;
     background-color: rgba(24, 24, 24, 0.7);
+    transform: translateZ(0);
   }
 }
 
@@ -79,6 +84,17 @@
   align-items: center;
   gap: 10px;
   font-size: 0.8rem;
+}
+@media (max-width: 1200px) and (min-width: 769px) {
+  .card-title {
+    font-size: 0.85rem !important;
+  }
+  .badge-box {
+    display: none !important;
+  }
+  .movie-info {
+    font-size: 0.7rem !important;
+  }
 }
 
 @media (max-width: 768px) {
