@@ -1,13 +1,13 @@
 .banner {
   height: 65vh;
-  background-position: left;
-  background-repeat: no-repeat;
-  background-size: cover;
   position: relative;
   display: flex;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
   align-items: flex-end;
   color: white;
-  padding: 20px;
+  padding: 10px;
 }
 .banner:before {
   content: "";
@@ -20,7 +20,7 @@
   z-index: 1;
 }
 
-.banner-text-area {
+.banner-info-area {
   width: 40%;
   position: relative;
   padding-left: 4%;
@@ -28,32 +28,58 @@
   flex-direction: column;
   height: auto;
   gap: 15px;
+  margin-bottom: 30px;
 }
-.banner-text-area p {
-  font-size: 1.2rem;
+.banner-info-area span {
+  font-size: 1.1rem;
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.banner-text-area > * {
+.banner-info-area .banner-info-btn {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35%;
+  padding: 8px;
+  border: 1px solid white;
+  color: white;
+}
+.banner-info-area .banner-info-btn:hover {
+  background-color: white;
+  color: black;
+}
+.banner-info-area > * {
   z-index: 2;
 }
 
 @media (max-width: 768px) {
+  .banner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .banner {
+    width: 90%;
     height: 50vh;
-    padding-bottom: 2rem;
+    border-radius: 20px;
   }
 
-  .banner-text-area {
+  .banner:before {
+    border: 1px solid white;
+    border-radius: 20px;
+  }
+  .banner-info-area {
     width: 80%;
   }
-  .banner-text-area h1 {
-    font-size: 2rem;
+  .banner-info-area h1 {
+    font-size: 1.5em;
+    margin-bottom: 0;
   }
-  .banner-text-area p {
+  .banner-info-area span {
     font-size: 1rem;
   }
 }

@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Modal, Alert } from "react-bootstrap";
 import YouTube from "react-youtube";
 import { useMovieVideosQuery } from "../../hooks/useMovieVideos";
 
-const MovieVideos = ({ movieId }) => {
-  const [showVideo, setShowVideo] = useState(false);
+const MovieVideos = ({ movieId, show, handleClose }) => {
+  // const [showVideo, setShowVideo] = useState(false);
   const { data, isError, error } = useMovieVideosQuery(movieId);
 
   const videoList = data?.data.results;
   const video = videoList?.find((v) => v.type === "Trailer") || videoList?.[0];
 
-  const handleOpen = () => setShowVideo(true);
-  const handleClose = () => setShowVideo(false);
+  // const handleOpen = () => setShowVideo(true);
+  // const handleClose = () => setShowVideo(false);
 
   const opts = {
     height: "390",
@@ -30,15 +30,15 @@ const MovieVideos = ({ movieId }) => {
 
   return (
     <div className="mb-3">
-      <Button
+      {/* <Button
         variant="danger"
         onClick={handleOpen}
         className="fw-bold d-flex align-items-center gap-2 video-btn"
       >
         <span>Watch Trailer ▶</span>
-      </Button>
+      </Button> */}
       <Modal
-        show={showVideo}
+        show={show}
         onHide={handleClose}
         size="lg"
         centered

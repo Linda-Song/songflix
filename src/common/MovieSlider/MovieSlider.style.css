@@ -1,8 +1,8 @@
 .carousel-container {
   overflow: visible !important;
-  padding: 20px;
+  padding: 10px;
   height: auto !important;
-  margin-bottom: 80px;
+  margin-bottom: 60px;
 }
 .carousel-container .swiper-wrapper {
   height: auto !important;
@@ -23,11 +23,17 @@
 
 /* 모바일에서 화살표 숨기기  */
 @media (max-width: 768px) {
+  .carousel-container {
+    padding: 5px;
+    margin-bottom: 30px;
+  }
+
   .carousel-container .swiper-button-next,
   .carousel-container .swiper-button-prev {
     display: none !important;
   }
   .carousel-container {
+    overflow: hidden !important;
     padding: 10px !important;
   }
 }

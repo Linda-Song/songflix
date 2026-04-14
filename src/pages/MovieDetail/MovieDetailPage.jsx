@@ -1,13 +1,15 @@
 import { Row, Col, Container, Alert } from "react-bootstrap";
 import { useMovieDetailQuery } from "../../hooks/useMovieDetail";
 import { useParams } from "react-router-dom";
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
 import MovieReview from "../../common/MovieReview/MovieReview";
 import MovieVideos from "../../common/MovieVideos/MovieVideos";
 import MovieRec from "../../common/MovieRec/MovieRec";
 import MovieGenre from "../../common/MovieGenre/MovieGenre";
 import "../MovieDetail/MovieDetailPage.style.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
 
 //0. 카드 누르면 navigate로 이동( onClick)
 //1.비디오 - (또는 이미지, 버튼 클릭시 모달로 영상)
@@ -20,7 +22,11 @@ const MovieDetailPage = () => {
   const { id } = useParams();
   const { data, isError, error } = useMovieDetailQuery(id);
   const movie = data?.data;
-
+  const [showVideo, setShowVideo] = useState(false);
+  const handlePlay = (e) => {
+    e.stopPropagation();
+    setShowVideo(true);
+  };
   const imgUrl = `https://media.themoviedb.org/t/p/original${movie.backdrop_path}`;
 
   if (isError) {
@@ -40,7 +46,14 @@ const MovieDetailPage = () => {
                 className="img-fluid w-100 h-100 object-fit-cover"
               />
               <div className="movie-video-wrapper">
-                <MovieVideos movieId={id} />
+                <button
+                  onClick={handlePlay}
+                  className="btn btn-link p-0 text-white btn-icon d-flex align-items-center gap-2"
+                  style={{ textDecoration: "none" }}
+                >
+                  <span className="fw-bold">Watch Trailer</span>
+                  <FontAwesomeIcon icon={faCirclePlay} size="2xl" />
+                </button>
               </div>
             </div>
           </Col>
@@ -111,6 +124,13 @@ const MovieDetailPage = () => {
           <h3>Recommendations</h3>
           <MovieRec movieId={id} />
         </Row>
+
+        {/* 영화 모달 */}
+        <MovieVideos
+          movieId={id}
+          show={showVideo}
+          handleClose={() => setShowVideo(false)}
+        />
       </Suspense>
     </Container>
   );
