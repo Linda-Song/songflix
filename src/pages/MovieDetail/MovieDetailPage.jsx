@@ -35,9 +35,14 @@ const MovieDetailPage = () => {
     return <Alert variant="danger">${error.message}</Alert>;
   }
   const movie = data?.data;
-
   if (!movie) return null;
-  const imgUrl = `https://media.themoviedb.org/t/p/original${movie.backdrop_path}`;
+  const mainPath = movie.backdrop_path || movie.poster_path;
+  const noImage =
+    "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg";
+  const imgUrl = mainPath
+    ? `https://media.themoviedb.org/t/p/original${mainPath}`
+    : noImage;
+
   return (
     <Container className="p-5 detail-container">
       {/* 영화이미지 */}
