@@ -4,14 +4,12 @@ import YouTube from "react-youtube";
 import { useMovieVideosQuery } from "../../hooks/useMovieVideos";
 
 const MovieVideos = ({ movieId, show, handleClose }) => {
-  // const [showVideo, setShowVideo] = useState(false);
   const { data, isError, error } = useMovieVideosQuery(movieId);
 
   const videoList = data?.data.results;
   const video = videoList?.find((v) => v.type === "Trailer") || videoList?.[0];
 
-  // const handleOpen = () => setShowVideo(true);
-  // const handleClose = () => setShowVideo(false);
+  // const [showVideo, setShowVideo] = useState(false);
 
   const opts = {
     height: "390",

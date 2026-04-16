@@ -49,7 +49,9 @@ const MoviePage = () => {
 
   const sortedMovies = useMemo(() => {
     if (!data?.data.results) return [];
-    let list = [...data.data.results];
+    let list = data.data.results.filter(
+      (movie) => movie.poster_path || movie.backdrop_path,
+    );
 
     if (sortBy === "desc") {
       list.sort((a, b) => b.popularity - a.popularity);

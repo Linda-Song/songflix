@@ -19,9 +19,15 @@ const MovieCard = ({ movie, showOverlay = true }) => {
   const goDetail = () => {
     navigate(`/movies/${movie.id}`);
   };
-
-  const backdropUrl = `https://media.themoviedb.org/t/p/w533_and_h300_face${movie.backdrop_path}`;
-  const posterUrl = `https://media.themoviedb.org/t/p/w500${movie.poster_path}`;
+  const noImage =
+    "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg";
+  const mainPath = movie.backdrop_path || movie.poster_path;
+  const backdropUrl = mainPath
+    ? `https://media.themoviedb.org/t/p/w533_and_h300_face${mainPath}`
+    : noImage;
+  const posterUrl = movie.poster_path
+    ? `https://media.themoviedb.org/t/p/w500${movie.poster_path}`
+    : backdropUrl;
 
   const toggleInfo = () => {
     setShowInfo(!showInfo);
@@ -42,7 +48,14 @@ const MovieCard = ({ movie, showOverlay = true }) => {
           {/* 768px 세로 이미지*/}
           <source srcSet={posterUrl} media="(max-width: 768px)" />
           {/* 기본 가로형 이미지 */}
-          <img src={backdropUrl} alt={movie.title} className="card-main-img" />
+          <img
+            src={backdropUrl}
+            alt={movie.title}
+            className="card-main-img"
+            onError={(e) => {
+              e.target.src = noImage;
+            }}
+          />
         </picture>
       </div>
       {showOverlay && (
